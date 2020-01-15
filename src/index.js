@@ -1,10 +1,5 @@
 import React, { PureComponent, lazy, Fragment } from "react";
 import ReactDOM from "react-dom";
-//import Layout from "./Layout.js";
-
-// import "./my-class.js";
-
-const Layout = lazy(() => import("./Layout.js"));
 
 class App extends PureComponent {
   state = {
@@ -99,7 +94,6 @@ class App extends PureComponent {
               >
                 rewmove the layout
               </button>
-              <Layout />
             </Fragment>
           </React.Suspense>
         )}
