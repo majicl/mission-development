@@ -1,39 +1,86 @@
-import React from "react";
+import React, { PureComponent, lazy, Fragment } from "react";
 import ReactDOM from "react-dom";
 //import Layout from "./Layout.js";
 
-const Layout = React.lazy(() => import("./Layout.js"));
+// import "./my-class.js";
 
-class App extends React.PureComponent {
+const Layout = lazy(() => import("./Layout.js"));
+
+class App extends PureComponent {
   state = {
-    isLayout: false
+    isLayout: false,
+    isGood: true,
+    loading: true,
+    date: new Date()
   };
 
-  static getDerivedStateFromProps(props, states) {}
-  componentDidMount() {}
+  constructor(props) {
+    super(props);
+    console.log("constructor App");
+    console.log("Majid: ", document.getElementById("majid"));
+  }
 
-  componentDidUpdate() {}
-  componentWillUnmount() {}
-  componentDidCatch(errors) {}
+  // static getDerivedStateFromProps(props, states) {
+  //   console.log("states, ", states);
+  //   console.log("props, ", props);
+  //   return {
+  //     isLayout: states.isLayout
+  //   };
+  // }
+  componentDidMount() {
+    console.log("componentDidMount");
+    this.setState({
+      isLayout: false
+    });
+    console.log("Majid: ", document.getElementById("majid"));
+  }
 
-  getSnapshotBeforeUpdate() {}
+  componentDidUpdate() {
+    console.log("componentDidUpdate");
+  }
+  componentWillUnmount() {
+    console.log("componentWillUnmount");
+  }
+  componentDidCatch(errors) {
+    console.log("componentDidCatch");
+  }
 
-  UNSAFE_componentWillMount() {}
+  componentWillMount() {
+    console.log("componentWillMount");
+  }
 
-  UNSAFE_componentWillUpdate() {}
+  // componentWillReceiveProps() {
+  //   console.log("componentWillReceiveProps");
+  //   return true;
+  // }
+  // getSnapshotBeforeUpdate() {
+  //   console.log("getSnapshotBeforeUpdate");
+  //   return null;
+  // }
 
-  UNSAFE_componentWillReceiveProps() {}
+  // UNSAFE_componentWillMount() {
+  //   console.log("UNSAFE_componentWillMount");
+  // }
+
+  // UNSAFE_componentWillUpdate() {
+  //   console.log("UNSAFE_componentWillUpdate");
+  // }
+
+  // UNSAFE_componentWillReceiveProps() {
+  //   console.log("UNSAFE_componentWillReceiveProps");
+  // }
 
   render() {
+    console.log("render");
     return (
       <div>
-        <div>
+        <div id="majid">
           <button
             onClick={() => {
               this.setState({ isLayout: true });
             }}
           >
-            replace to layout
+            add the layout
           </button>
         </div>
         {this.state.isLayout && (
@@ -44,7 +91,16 @@ class App extends React.PureComponent {
               </div>
             }
           >
-            <Layout />
+            <Fragment>
+              <button
+                onClick={() => {
+                  this.setState({ isLayout: false });
+                }}
+              >
+                rewmove the layout
+              </button>
+              <Layout />
+            </Fragment>
           </React.Suspense>
         )}
       </div>

@@ -1,12 +1,32 @@
 import React from "react";
-
-console.log("layout is rendered xxxx");
 export default class Layout extends React.Component {
-  async componentDidMount() {
-    await console.log("layout is rendered 1");
+  constructor(props) {
+    super(props);
+    console.log("constructor Layout");
   }
+  state = {
+    date: new Date()
+  };
+  componentDidMount() {
+    console.log("layout: componentDidMount");
+
+    const intervalId = setInterval(() => {
+      this.setState({
+        date: new Date()
+      });
+    }, 1000);
+
+    this.setState({
+      intervalId
+    });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId);
+  }
+
   render() {
-    console.log("layout is rendered");
-    return <div>Layout</div>;
+    //console.log("layout is rendered");
+    return <div id="layout">{this.state.date.toString()}</div>;
   }
 }
